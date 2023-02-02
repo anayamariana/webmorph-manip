@@ -1,0 +1,100 @@
+---
+title: "script_average_white"
+output: html_document
+date: "2023-02-01"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(reticulate)
+library(webmorphR)
+library(webmorphR.stim) # for extra stimulus sets
+library(webmorphR.dlib) # for dlib auto-delineation
+options(rgl.useNULL=TRUE)
+library(rgl)
+use_python("C:\\Users\\manayamartinez\\AppData\\Local\\Programs\\Python\\Python37")
+
+```
+
+```{r}
+avg_white<- read_stim("~/Mariana/average_pics_png")
+avg_white
+```
+
+```{r}
+avg_white<- avg_white|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+draw_tem(avg_white)
+
+```
+
+```{r}
+WM<- read_stim("~/Mariana/radiate/WM")
+
+WM<- WM|>
+  resize(1/2) |>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+```{r}
+WM
+```
+
+```{r}
+resize(WM, .5) |> draw_tem()
+```
+
+```{r}
+
+WM[[2]]
+avg_white[[2]]
+avg_white[[5]]
+```
+
+
+
+```{r}
+WM_faces_incomp <- trans(trans_img = WM[[2]], 
+                  from_img = avg_white[[7]], 
+                  to_img = avg_white[[3]],
+                  shape = c(distinctive = -3, average = 3),
+                  color = 0, texture = 0)
+```
+
+```{r}
+WM[[2]]
+WM_faces_incomp
+```
+```{r}
+c(subset(WM_faces_comp, "average"),
+  subset(WM_faces_comp, "distinctive")) |>
+  pad(120, 0, 0, 0, fill = "black") |>
+  label(size = 90, 
+        weight = 700,
+        gravity = "north",
+        location = "+0+10") |>
+  plot(nrow = 2)
+```
+
+```{r}
+WM_faces_comp <- trans(trans_img = WM[[2]], 
+                  from_img = avg_white[[4]], 
+                  to_img = avg_white[[7]],
+                  shape = c(distinctive = -0.5, average = 1),
+                  color = 0, texture = 0)|>
+  align(procrustes = TRUE)
+```
+
+```{r}
+WM_faces_comp
+```
+

@@ -1,0 +1,151 @@
+---
+title: "script_black"
+output: html_document
+date: "2023-02-01"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(reticulate)
+library(webmorphR)
+library(webmorphR.stim) # for extra stimulus sets
+library(webmorphR.dlib) # for dlib auto-delineation
+options(rgl.useNULL=TRUE)
+library(rgl)
+use_python("C:\\Users\\manayamartinez\\AppData\\Local\\Programs\\Python\\Python37")
+
+```
+
+```{r}
+black_setmin3<- read_stim("~/Mariana/Black_Competence", pattern='-3')
+black_setmin2<- read_stim("~/Mariana/Black_Competence", pattern='-2')
+black_setmin1<- read_stim("~/Mariana/Black_Competence", pattern='-1')
+black_set_0<- read_stim("~/Mariana/Black_Competence", pattern='_00')
+black_set_1<- read_stim("~/Mariana/Black_Competence", pattern='_01')
+black_set_2<- read_stim("~/Mariana/Black_Competence", pattern='_02')
+black_set_3<- read_stim("~/Mariana/Black_Competence", pattern='_03')
+```
+
+```{r}
+black_3<- black_set_3|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+black_2<- black_set_2|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+black_1<- black_set_1|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+black_0<- black_set_0|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+black_min3<- black_setmin3|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+black_min2<- black_setmin2|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+black_min1<- black_setmin1|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+avg_b3 <- avg(black_3)
+avg_b2 <- avg(black_2)
+avg_b1 <- avg(black_1)
+avg_b0 <- avg(black_0)
+avg_bmin3 <- avg(black_min3)
+avg_bmin2 <- avg(black_min2)
+avg_bmin1 <- avg(black_min1)
+
+```
+
+```{r}
+avg_b3
+avg_b2
+avg_b1
+avg_b0
+avg_bmin1
+avg_bmin2
+avg_bmin3
+```
+```{r}
+draw_tem(avg_b3)
+```
+
+```{r}
+#save average faces
+png(file="~/Mariana/average_bpics_png/avg_b3.png",
+width=600, height=600)
+avg_b3
+dev.off()
+```
+```{r}
+png(file="~/Mariana/average_bpics_png/avg_b2.png",
+width=600, height=600)
+avg_b2
+dev.off()
+```
+
+```{r}
+png(file="~/Mariana/average_bpics_png/avg_b1.png",
+width=600, height=600)
+avg_b1
+dev.off()
+```
+```{r}
+png(file="~/Mariana/average_bpics_png/avg_b0.png",
+width=600, height=600)
+avg_b0
+dev.off()
+```
+
+```{r}
+png(file="~/Mariana/average_bpics_png/avg_bmin1.png",
+width=600, height=600)
+avg_bmin1
+dev.off()
+```
+```{r}
+png(file="~/Mariana/average_bpics_png/avg_bmin2.png",
+width=600, height=600)
+avg_bmin2
+dev.off()
+```
+
+```{r}
+png(file="~/Mariana/average_bpics_png/avg_bmin3.png",
+width=600, height=600)
+avg_bmin3
+dev.off()
+```
+

@@ -1,0 +1,38 @@
+---
+title: "scrpit_average_black"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(reticulate)
+library(webmorphR)
+library(webmorphR.stim) # for extra stimulus sets
+library(webmorphR.dlib) # for dlib auto-delineation
+options(rgl.useNULL=TRUE)
+library(rgl)
+use_python("C:\\Users\\manayamartinez\\AppData\\Local\\Programs\\Python\\Python37")
+
+```
+
+```{r}
+avg_black<- read_stim("~/Mariana/average_bpics_png")
+avg_black
+```
+```{r}
+avg_black<- avg_black|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+
+```
+```{r}
+draw_tem(avg_black)
+```
+```{r}
+
+```
+

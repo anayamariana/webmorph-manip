@@ -1,0 +1,157 @@
+---
+title: "script_1"
+output: html_document
+date: "2023-02-01"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(reticulate)
+library(webmorphR)
+library(webmorphR.stim) # for extra stimulus sets
+library(webmorphR.dlib) # for dlib auto-delineation
+options(rgl.useNULL=TRUE)
+library(rgl)
+use_python("C:\\Users\\manayamartinez\\AppData\\Local\\Programs\\Python\\Python37")
+
+```
+
+
+```{r}
+white_set_3<- read_stim("~/Mariana/25MaxDistinct_Competent", pattern='_3.00')
+white_set_min3 <- read_stim("~/Mariana/25MaxDistinct_Competent", pattern='_-3.00')
+white_set_min2 <- read_stim("~/Mariana/25MaxDistinct_Competent", pattern='_-2.00')
+white_set_2 <- read_stim("~/Mariana/25MaxDistinct_Competent", pattern='_2.00')
+white_set_min1 <- read_stim("~/Mariana/25MaxDistinct_Competent", pattern='_-1.00')
+white_set_1 <- read_stim("~/Mariana/25MaxDistinct_Competent", pattern='_1.00')
+white_set_0 <- read_stim("~/Mariana/25MaxDistinct_Competent", pattern='_0.00')
+
+```
+
+```{r}
+white_3<- white_set_3|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+white_2<- white_set_2|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+white_1<- white_set_1|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+white_0<- white_set_0|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+white_min3<- white_set_min3|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+white_min2<- white_set_min2|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+white_min1<- white_set_min1|>
+  auto_delin(model = "dlib70") |>
+  align(procrustes = TRUE) |>
+  crop(width = 0.9, height = 0.9, y_off = 0)
+```
+
+```{r}
+avg_w3 <- avg(white_3)
+avg_wmin3  <- avg(white_min3)
+avg_w2 <- avg(white_2)
+avg_wmin2  <- avg(white_min2)
+avg_w1 <- avg(white_1)
+avg_wmin1  <- avg(white_min1)
+avg_w0 <- avg(white_0)
+```
+
+```{r}
+avg_w3 
+avg_w2 
+avg_w1 
+avg_w0 
+avg_wmin1 
+avg_wmin2  
+avg_wmin3 
+```
+
+```{r}
+jpeg(file="avg_w3.jpeg")
+avg_w3 
+dev.off()
+```
+
+```{r}
+png(file="~/Mariana/average_wpics_png/avg_w3.png",
+width=600, height=600)
+avg_w3
+dev.off()
+```
+```{r}
+png(file="~/Mariana/average_wpics_png/avg_w2.png",
+width=600, height=600)
+avg_w2
+dev.off()
+```
+
+```{r}
+png(file="~/Mariana/average_wpics_png/avg_w1.png",
+width=600, height=600)
+avg_w1
+dev.off()
+```
+
+```{r}
+png(file="~/Mariana/average_wpics_png/avg_wmin3.png",
+width=600, height=600)
+avg_wmin3 
+dev.off()
+```
+
+```{r}
+png(file="~/Mariana/average_wpics_png/avg_wmin2.png",
+width=600, height=600)
+avg_wmin2 
+dev.off()
+```
+
+```{r}
+png(file="~/Mariana/average_wpics_png/avg_wmin1.png",
+width=600, height=600)
+avg_wmin1
+dev.off()
+```
+
+```{r}
+
+png(file="~/Mariana/average_wpics_png/avg_w0.png",
+width=600, height=600)
+avg_w0
+dev.off()
+```
+
